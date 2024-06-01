@@ -1,0 +1,13 @@
+{% extends "main.html" %} 
+{% block title %} Cancel {% endblock title%} 
+{% block content %}
+<div style="margin-top:8%">
+    <div class="alert alert-info" role="alert">
+        Forgot to add something to your cart?
+        <a
+            href="{% url 'products:product-list' %}"
+            >Go to Products</a
+          >
+      </div>
+</div>
+{% endblock content %}

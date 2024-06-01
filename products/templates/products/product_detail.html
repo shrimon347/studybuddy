@@ -1,0 +1,35 @@
+{% extends 'main.html' %}
+{% block title %} Buy Product {% endblock title%} 
+{% block content %}
+<div style="margin-top:8%;">
+  <div class="card-deck" style=" box-shadow: 7px 7px 25px grey; width: 60%;  margin: 0 auto; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px 0 30px 0;border-radius: 1rem;">
+    {% for price in prices %}
+    <div class="card" style="width: 60%; margin: 0 auto; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+      <img
+        class="card-img-top"
+        src="{{product.thumbnail.url}}"
+        alt="Card image cap"
+        style="width: 400px; height: 100%; border-radius: 1rem;"
+      />
+      <div class="card-body" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <h5 class="card-title" style="font-size: 200%;">{{product.name}}</h5>
+        <p class="card-text" style="font-size:larger; text-align: justify;">{{product.desc}}</p>
+        <div class="card-text" style="width: 100%;">
+          <h5 class="card-text" style="font-size: 300%; display: flex; align-items: center; justify-content: center;">${{ price.price }}</h5>
+          
+          <form
+          action="{% url 'products:create-checkout-session' price.id %}"
+          method="POST"
+          >
+            {% csrf_token %}
+            <button type="submit"  class="btn btn--dark"
+            style="width: 100%; display: flex; justify-content: center;">Checkout</button>
+          </form>
+          
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}

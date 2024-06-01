@@ -1,0 +1,22 @@
+Thank you rakib, Assalamualikum 
+For our project design we chose Evolutionary Model This model has a number of advantages such as Users involvement, 
+taking feedback from the users during development, and building the exact product that the user wants.
+Technology used in our project for fron-end we use html css javascript and bootstrap
+and for backend we used python based framwork django and django RestFramework
+and for database we used MYSQL
+Two module used in our project admin and User
+In admin module admin can manage Notes, manage the users and monotoring the overall activities
+and In user module user can uplod notes, search notes by subject, download notes, delete notes
+and also create the blog and room for building community  
+some implementation of our project
+During the project design with the help of our honorable supervisor
+We have already solved many problems. Future task will be -
+User authentication with google, github and facebook.
+Room create and also search option will be implemented.
+Blog writing will be implemented.
+Note uploading, downloading and deleting will be implemented.
+Database design and Implementation. 
+
+
+Models Comparision:
+The waterfall model is more rigid and suitable for projects with well-defined requirements, whereas the evolutionary model is more flexible and adaptive, making it better suited for projects with changing or unclear requirements, where client involvement and feedback are crucial

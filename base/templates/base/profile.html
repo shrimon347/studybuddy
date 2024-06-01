@@ -1,0 +1,106 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<main class="profile-page layout bloglayout--3">
+  <div class="container">
+    <!-- Topics Start -->
+    {% comment %} {% include 'base/topics_component.html' %} {% endcomment %}
+    <!-- Topics End -->
+
+    <div class="roomList" style="margin-top:15%">
+      {% for post in posts %}
+        <div class="roomListRoom">
+          
+              <div class="blogListRoom__header">
+                <a href="{% url "detail" post.slug %}" class="blogListRoom__author">
+                  <div>
+                    <span class="blog-title">{{post.title}}</span>
+                    {{post.content|safe|truncatechars:300}} read more
+                    <div class="blogListRoom__actions">
+                       Publised : {{post.created|date:"d M"}}
+                    </div>
+                   </div>
+                </a>
+                
+              </div>
+            <div class="roomListRoom__meta">
+                <p class="roomListRoom__topic">{{post.category}}</p>
+            </div>
+        </div>
+        {% endfor %}
+      </div>
+
+    <!-- Room List Start -->
+    <div class="roomList">
+      <div class="profile">
+        <div class="profile__avatar">
+          <div class="avatar avatar--large active">
+            <img src="{{user.avatar.url}}" />
+          </div>
+        </div>
+        <div class="profile__info">
+          <h3>{{user.name}}</h3>
+          <p>@{{user.username}}</p>
+
+          {% comment %} <strong>Follows</strong> <br>
+          {% for following in user.follows.all %}
+            <a href="{% url 'user-profile' following.username %}">@{{following}}</a> <br>
+          {% endfor %}
+
+          <strong>Follwed by</strong> <br>
+          {% for following in user.followed_by.all %}
+            <a href="{% url 'user-profile' following.username %}">@{{following}}</a> <br>
+          {% endfor %} {% endcomment %}
+         
+          {% comment %} <div>
+            <ul>
+              <li><span>{{user_followers}}</span> followers</li>
+              <li><span>{{user_followering}}</span> followeing</li>
+            </ul>
+          </div> {% endcomment %}
+          {% if request.user == user %}
+          <a href="{% url 'update-user' %}" class="btn btn--main btn--pill">Edit Profile</a>
+          {% endif %}
+        </div>
+        <div class="profile__about">
+          <h3>About</h3>
+          <p>
+            {{user.bio}}
+          </p>
+        </div>
+      </div>
+
+      <div class="roomList__header">
+        <div>
+          <h2>Study Rooms Hosted by {{user.username}}</a>
+          </h2>
+        </div>
+      </div>
+      {% include 'base/feed_component.html' %}
+
+      <div class="center">
+        <p style="padding: 10px;">{{page}} / {{roomdata.paginator.num_pages}} </p>
+        <div class="pagination pagination1 pagination3 pagination4 pagination6">
+          {% if roomdata.has_previous %}
+          <a class="btn-page" href="?page=1" >First</a>
+          <a class="btn-page" href="?page={{roomdata.previous_page_number}}" >Previous</a>
+          {% endif %}
+          {% for n in  totalpagelist%}
+          <a class="btn-page" href="?page={{n}}">{{n}}</a>{% endfor %}
+          {% if roomdata.has_next %}
+          <a class="btn-page" href="?page={{roomdata.next_page_number}}">&raquo;</a>
+          <a class="btn-page" href="?page={{lastpage}}">Last</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <!-- Room List End -->
+
+    <!-- Activities Start -->
+    <div style="margin-top:15%">
+      {% include 'base/activity_component.html' %}
+    </div>
+    <!-- Activities End -->
+  </div>
+</main>
+{% endblock content %}

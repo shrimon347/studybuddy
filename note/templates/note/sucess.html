@@ -1,0 +1,14 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+<main class="layout layout--3">
+  <div class="container">
+    <div></div>
+    <div class="">
+      <img src="{% static 'assets/bg-back/success.gif' %}" alt="" />
+      <div style="text-align:center; margin-top:2%">
+        File Downloaded Successfully <a class="btn btn--dark" href="{% url 'note' %}">Back to Home</a>
+      </div>
+    </div>
+    <div></div>
+  </div>
+</main>
+{% endblock content %}

@@ -1,0 +1,97 @@
+{% extends 'main.html' %} {% block content %}
+
+<main class="layout layout--3">
+  <div class="container">
+    <!-- Topics Start -->
+    <div></div>
+
+    <!-- Topics End -->
+
+    <!-- Room List Start -->
+    <div class="roomList">
+      <div class="roomList__header">
+        <div>
+          <h2>MY Notes</h2>
+          <p>Notes available</p>
+        </div>
+
+        <a class="btn btn--main" href="{% url 'upload_notes' %}">
+          <svg
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 32 32"
+          >
+            <title>add</title>
+            <path
+              d="M16.943 0.943h-1.885v14.115h-14.115v1.885h14.115v14.115h1.885v-14.115h14.115v-1.885h-14.115v-14.115z"
+            ></path>
+          </svg>
+          Upload Note
+        </a>
+      </div>
+
+      {% for note in notes%}
+      <div class="roomListRoom">
+        <div class="roomListRoom__header">
+          <a
+            href="{% url 'user-profile' note.user.username %}"
+            class="roomListRoom__author"
+          >
+            <div class="avatar avatar--small">
+              <img src="{{note.user.avatar.url}}" />
+            </div>
+            <span>@{{note.user.username}}</span>
+          </a>
+          <div class="roomListRoom__actions">
+            <span class="roomListRoom__topic" style="font-size:15px">{{note.subject}}</span>
+          </div>
+        </div>
+        <div class="roomListRoom__content">
+          <a href="{{note.notesfile.url}}" download>{{note.notesfile}}</a>
+          <br />
+          <p>{{note.description}}</p>
+        </div>
+        <div class="roomListRoom__meta">
+          <div class="roomListRoom__joined">
+            <span style="font-size:14px">{{note.created|date:"d M , Y"}}</span>
+          </div>
+          
+          
+          <div>
+            {% if note.status %}
+            <span class="roomListRoom__topic" style="font-size:15px">Status : Approved</span>
+            {% else %}
+            <span class="roomListRoom__topic" style="font-size:15px">Status : Pending</span>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+      <!-- <div class="center">
+        <p style="padding: 10px; color:green;">{{page}} / {{roomdata.paginator.num_pages}} </p>
+        <div class="pagination pagination1 pagination3 pagination4 pagination6">
+          {% if roomdata.has_previous %}
+          <a class="btn-page" href="?page=1" >First</a>
+          <a class="btn-page" href="?page={{roomdata.previous_page_number}}" >Previous</a>
+          {% endif %}
+          {% for n in  totalpagelist%}
+          <a class="btn-page" href="?page={{n}}">{{n}}</a>{% endfor %}
+          {% if roomdata.has_next %}
+          <a class="btn-page" href="?page={{roomdata.next_page_number}}">&raquo;</a>
+          <a class="btn-page" href="?page={{lastpage}}">Last</a>
+          {% endif %}
+        </div>
+      </div> -->
+    </div>
+    <!-- Room List End -->
+
+    <!-- Activities Start -->
+    <div></div>
+    <!-- Activities End -->
+  </div>
+</main>
+
+{% endblock %}

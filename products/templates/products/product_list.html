@@ -1,0 +1,39 @@
+{% extends 'main.html' %} {% block title %} Products {% endblock title%} 
+{%block content %} {% for product in products %}
+
+<main class="layout--3 layout">
+  <div class="container">
+    <div></div>
+    <div class="roomList">
+      <div class="roomListRoom">
+        <div class="blogListRoom__header">
+          <a
+            href="{% url 'products:product-detail' product.id %}"
+            class="blogListRoom__author"
+          >
+            <div class="blog-img blog--small">
+              <img src="{{product.thumbnail.url}}" />
+            </div>
+            <div style="text-align: justify;">
+              <span class="blog-title">{{product.name}}</span>
+              {{product.desc|safe|truncatechars:200}} <more style="color: gray;">read more</more> 
+            </div>
+          </a>
+        </div>
+
+        <div class="" style="margin-top:2%">
+
+          <a
+              href="{% url 'products:product-detail' product.id %}"
+              class="btn btn--dark"
+              style="width: 100%; display: flex; justify-content: center;"
+              >View Detail</a
+            >
+        </div>
+      </div>
+    </div>
+    <div></div>
+  </div>
+</main>
+
+{% endfor %} {%endblock content%}

@@ -1,0 +1,49 @@
+{% for post in posts %}
+{% if post.status %}
+            <div class="roomListRoom">
+                <div class="blogListRoom__header">
+                    <a href="{% url "detail" post.slug %}" class="blogListRoom__author">
+                        <div class="blog-img blog--small">
+                            <img src="{{post.image.url}}" />
+                        </div>
+                       <div>
+                        <span class="blog-title">{{post.title}}</span>
+                        {{post.content|safe|truncatechars:200}} read more
+                        <div class="blogListRoom__actions">
+                           Publised : {{post.created|date:"d M"}}
+                        </div>
+                       </div>
+                    </a>
+                    
+                </div>
+                <div class="roomListRoom__content">
+                    <a href="{% url 'user-profile' post.writer.username %}" style="color:black; font-size:20px">Author : @{{post.writer.username}}</a>
+                    <span style="margin-left:20px; font-size:15px;">( {{post.created|timesince}} ago )</span>
+                </div>
+                <div class="roomListRoom__meta">
+                   
+
+                    <form action="{% url 'like-post' %}" method='POST'>
+                        {% csrf_token %}
+                        <input type="hidden" name='post_id' value={{post.id}}>
+                        {% if user not in post.liked.all %}
+                           <button type='submit'class="roomListRoom__joined" style="outline: none;
+                           border: none;background-color: white; cursor: pointer;"> <svg style="color:black"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.5998 8.00033H21C22.1046 8.00033 23 8.89576 23 10.0003V12.1047C23 12.3659 22.9488 12.6246 22.8494 12.8662L19.755 20.3811C19.6007 20.7558 19.2355 21.0003 18.8303 21.0003H2C1.44772 21.0003 1 20.5526 1 20.0003V10.0003C1 9.44804 1.44772 9.00033 2 9.00033H5.48184C5.80677 9.00033 6.11143 8.84246 6.29881 8.57701L11.7522 0.851355C11.8947 0.649486 12.1633 0.581978 12.3843 0.692483L14.1984 1.59951C15.25 2.12534 15.7931 3.31292 15.5031 4.45235L14.5998 8.00033ZM7 10.5878V19.0003H18.1606L21 12.1047V10.0003H14.5998C13.2951 10.0003 12.3398 8.77128 12.6616 7.50691L13.5649 3.95894C13.6229 3.73105 13.5143 3.49353 13.3039 3.38837L12.6428 3.0578L7.93275 9.73038C7.68285 10.0844 7.36341 10.3746 7 10.5878ZM5 11.0003H3V19.0003H5V11.0003Z"></path></svg>{{post.liked.all.count}}Like</button>
+
+                        {% else %}
+                        <button type='submit'class="roomListRoom__joined" style="outline: none;
+                        border: none;background-color: white; cursor: pointer;"> <svg style="color:green" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" id="dislike"><g fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"><path d="M4.5 1.5h-4v7h4M4.5 8.5l2 3.5v2.5H8A1.5 1.5 0 0 0 9.5 13V9.5H14A1.5 1.5 0 0 0 15.5 8V6l-1.604-3.609a1.5 1.5 0 0 0-1.371-.891H4.5v7z"></path></g></svg>{{post.liked.all.count}} Like</button>
+                        {% endif %}
+                    </form>
+                    {% comment %} <a href="#" class="roomListRoom__joined"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.5998 8.00033H21C22.1046 8.00033 23 8.89576 23 10.0003V12.1047C23 12.3659 22.9488 12.6246 22.8494 12.8662L19.755 20.3811C19.6007 20.7558 19.2355 21.0003 18.8303 21.0003H2C1.44772 21.0003 1 20.5526 1 20.0003V10.0003C1 9.44804 1.44772 9.00033 2 9.00033H5.48184C5.80677 9.00033 6.11143 8.84246 6.29881 8.57701L11.7522 0.851355C11.8947 0.649486 12.1633 0.581978 12.3843 0.692483L14.1984 1.59951C15.25 2.12534 15.7931 3.31292 15.5031 4.45235L14.5998 8.00033ZM7 10.5878V19.0003H18.1606L21 12.1047V10.0003H14.5998C13.2951 10.0003 12.3398 8.77128 12.6616 7.50691L13.5649 3.95894C13.6229 3.73105 13.5143 3.49353 13.3039 3.38837L12.6428 3.0578L7.93275 9.73038C7.68285 10.0844 7.36341 10.3746 7 10.5878ZM5 11.0003H3V19.0003H5V11.0003Z"></path></svg> 4 Like
+                    </a> {% endcomment %}
+                    <a href="{% url "detail" post.slug %}" class="roomListRoom__joined">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 22.5L11.2 19H6C5.44772 19 5 18.5523 5 18V7.10256C5 6.55028 5.44772 6.10256 6 6.10256H22C22.5523 6.10256 23 6.55028 23 7.10256V18C23 18.5523 22.5523 19 22 19H16.8L14 22.5ZM15.8387 17H21V8.10256H7V17H11.2H12.1613L14 19.2984L15.8387 17ZM2 2H19V4H3V15H1V3C1 2.44772 1.44772 2 2 2Z"></path></svg>
+                       {{post.comment_set.all.count}} comment
+                    </a>
+                    <p class="roomListRoom__topic">{{post.category}}</p>
+                </div>
+            </div>
+            {% endif %}
+            
+{% endfor %}

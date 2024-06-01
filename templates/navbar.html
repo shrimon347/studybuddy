@@ -1,0 +1,151 @@
+{% load static %}
+<!--=============== HEADER ===============-->
+<header class="header">
+  <nav class="nav container">
+    <div class="nav__data">
+      <a href="{% url 'note' %}" class="nav__logo">
+        <i class="ri-planet-line"></i> Share Me Note
+     </a>
+
+      <div class="nav__toggle" id="nav-toggle">
+        <i class="ri-menu-line nav__burger"></i>
+        <i class="ri-close-line nav__close"></i>
+      </div>
+    </div>
+
+    <!--=============== NAV MENU ===============-->
+    <div class="nav__menu" id="nav-menu">
+      <ul class="nav__list">
+        <li><a href="{% url 'note' %}" class="nav__link">Home</a></li>
+
+        <li><a href="{% url 'rooms' %}" class="nav__link">Rooms</a></li>
+
+        <!--=============== DROPDOWN 1 ===============-->
+        <li class="dropdown__item">
+          <div class="nav__link">
+           <a > Blog <i class="ri-arrow-down-s-line dropdown__arrow"></i></a>
+          </div>
+
+          <ul class="dropdown__menu">
+           
+            <li>
+              <a href="{% url 'index' %}" class="dropdown__link">
+                <i class="ri-upload-line"></i>All Post
+              </a>
+              <a href="{% url "create" %}" class="dropdown__link">
+                <i class="ri-upload-line"></i>Create_Post
+              </a>
+            </li>
+
+            <!--=============== DROPDOWN SUBMENU ===============-->
+            <!-- <li class="dropdown__subitem">
+                          <div class="dropdown__link">
+                             <i class="ri-bar-chart-line"></i> Reports <i class="ri-add-line dropdown__add"></i>
+                          </div>
+
+                          <ul class="dropdown__submenu">
+                             <li>
+                                <a href="#" class="dropdown__sublink">
+                                   <i class="ri-file-list-line"></i> Documents
+                                </a>
+                             </li>
+     
+                             <li>
+                                <a href="#" class="dropdown__sublink">
+                                   <i class="ri-cash-line"></i> Payments
+                                </a>
+                             </li>
+     
+                             <li>
+                                <a href="#" class="dropdown__sublink">
+                                   <i class="ri-refund-2-line"></i> Refunds
+                                </a>
+                             </li>
+                          </ul>
+                       </li> -->
+          </ul>
+        </li>
+        <!--=============== DROPDOWN 2 ===============-->
+        <li class="dropdown__item">
+          <div class="nav__link">
+            Note <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+          </div>
+
+          <ul class="dropdown__menu">
+            <li>
+              <a href="{% url "upload_notes" %}" class="dropdown__link">
+                <i class="ri-upload-line"></i> Upload_Note
+              </a>
+            </li>
+
+            <li>
+              <a href="{% url "my_notes" %}" class="dropdown__link">
+                <i class="ri-book-line"></i> My Note
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li><a href="{% url "products:product-list" %}" class="nav__link">Feature Books</a></li>
+        <li><a href="{% url "contact" %}" class="nav__link">Contact Us</a></li>
+
+        <!--=============== DROPDOWN 3 ===============-->
+        {% if request.user.is_authenticated %}
+        <li class="dropdown__item">
+          <!-- Logged In -->
+
+          <div class="nav__link">
+            <div
+              style="border-radius: 50%; border: 2px solid white"
+              class="avatar avatar--medium active"
+            >
+              <img style="width:35px; height: 35px;" src="{{request.user.avatar.url}}" />
+            </div>
+            <a
+              class="nav__link"
+              style="color: white"
+              href="{% url 'update-user' %}"
+            >
+              {{request.user.username}}
+              <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+            </a>
+          </div>
+
+          
+          <ul class="dropdown__menu">
+            <li>
+              <a
+                href="{% url 'user-profile' request.user.username %}"
+                class="dropdown__link"
+              >
+                <i class="ri-user-line"></i> Profiles
+              </a>
+            </li>
+
+            <li>
+              <a href="{% url 'logout' %}" class="dropdown__link">
+                <i class="ri-lock-line"></i> Logout
+              </a>
+            </li>
+          </ul>
+         {% else %}
+          <div class="nav__link">
+            <div
+              style="border-radius: 50%; border: 2px solid white"
+              class="avatar avatar--medium active"
+            >
+              <img style="width:35px; height: 35px;" src="{% static 'assets/avatar.svg' %}" />
+            </div>
+            <a
+              class="nav__link"
+              style="color: white"
+              href="{% url 'update-user' %}"
+            >
+              Login
+            </a>
+          </div>
+          {% endif %}
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>

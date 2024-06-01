@@ -1,0 +1,20 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+<main class="layout layout--3">
+  <div class="container">
+    <div></div>
+    <div class="">
+      <img src="{% static 'assets/bg-back/success.gif' %}" alt="" />
+      <div style="text-align:center; margin-top:2%">
+        <div>
+          <p>Check your Mail </p>
+        </div>
+        Payment Successfully <a class="btn btn--dark" href="{% url 'products:product-list' %}">Go to Products</a>
+      </div>
+    </div>
+    <div></div>
+  </div>
+</main>
+{% endblock content %}
+
+
+<a href="{% url 'products:product-list' %}">Go to Products</a>
