@@ -31,7 +31,7 @@ This is the project of my 8tth semester of my university. In this project we can
 
 
 ### Room page
-![note_share website](https://github.com/shrimon347/studybuddy/blob/master/image/rooms.PNGraw=true)
+![note_share website](https://github.com/shrimon347/studybuddy/blob/master/image/rooms.PNG?raw=true)
 ### Blog page
 ![note_share website](https://github.com/shrimon347/studybuddy/blob/master/image/blogs.PNG?raw=true)
 ### blog Details page
